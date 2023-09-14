@@ -9,7 +9,7 @@ namespace Project1
 {
     public class ManageUser
     {
-        public static List<User> users = new List<User>();
+        public List<User> users = new List<User>();
 
         public void AddUser(string firstName, string lastName, string password)
         {
@@ -21,7 +21,7 @@ namespace Project1
             }
 
             int nextId = users.Count + 1; // Menentukan ID berikutnya
-            User newUser = new User(nextId, firstName, lastName, password);
+            User newUser = new User(nextId, firstName, lastName, password, users);
 
             users.Add(newUser); // Menambahkan pengguna ke dalam koleksi
             Console.WriteLine("Data user berhasil dibuat !!!\n");
@@ -32,7 +32,7 @@ namespace Project1
         public void DataDummy(string firstName, string lastName, string password) //pembuatan data dummy
         {
             int nextId = users.Count + 1; // Menentukan ID berikutnya
-            User newUser = new User(nextId, firstName, lastName, password);
+            User newUser = new User(nextId, firstName, lastName, password, users);
 
             users.Add(newUser);
         }
