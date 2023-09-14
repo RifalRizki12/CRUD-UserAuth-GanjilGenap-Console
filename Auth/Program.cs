@@ -8,7 +8,7 @@ class Program
     {
         MenuUser();
     }
-    
+
     public static void MenuUser()
     {
         ManageUser manageUser = new ManageUser();
@@ -73,36 +73,33 @@ class Program
                     switch (pilih)
                     {
                         case "1":
-                            while (true)
+                            Console.WriteLine("--------------------------");
+                            Console.Write("Masukkan Id yang ingin di edit : ");
+                            if (int.TryParse(Console.ReadLine(), out int editId))
                             {
-                                Console.WriteLine("--------------------------");
-                                Console.Write("Masukkan Id yang ingin di edit : ");
-                                if (int.TryParse(Console.ReadLine(), out int editId))
+                                User userToEdit = manageUser.FindUserById(editId);
+                                if (userToEdit != null)
                                 {
-                                    User userToEdit = manageUser.FindUserById(editId);
-                                    if (userToEdit != null)
-                                    {
-                                        Console.Write("Masukkan FirstName : ");
-                                        string newFirstName = Console.ReadLine();
-                                        Console.Write("Masukkan LastName : ");
-                                        string newLastName = Console.ReadLine();
-                                        Console.Write("Masukkan Password Baru : ");
-                                        string newPassword = Console.ReadLine();
+                                    Console.Write("Masukkan FirstName : ");
+                                    string newFirstName = Console.ReadLine();
+                                    Console.Write("Masukkan LastName : ");
+                                    string newLastName = Console.ReadLine();
+                                    Console.Write("Masukkan Password Baru : ");
+                                    string newPassword = Console.ReadLine();
 
-                                        if (manageUser.IsValidPassword(newPassword))
-                                        {
-                                            manageUser.editUser(editId, newFirstName, newLastName, newPassword);
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("\nPassword minimal 8 Karakter, Kapital, Angka !");
-                                        }
+                                    if (manageUser.IsValidPassword(newPassword))
+                                    {
+                                        manageUser.editUser(editId, newFirstName, newLastName, newPassword);
+                                        break;
                                     }
                                     else
                                     {
-                                        Console.WriteLine("\nID tidak ditemukan. Silakan coba lagi.");
+                                        Console.WriteLine("\nPassword minimal 8 Karakter, Kapital, Angka !");
                                     }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nID tidak ditemukan. Silakan coba lagi.");
                                 }
                             }
                             break;
