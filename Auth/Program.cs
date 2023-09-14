@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Project1;
-
+namespace Project1.Auth;
 class Program
 {
     public static void Main(string[] args)
@@ -20,7 +19,6 @@ class Program
 
         while (true)
         {
-
             Console.WriteLine("==========================");
             Console.WriteLine("\t Menu: \t");
             Console.WriteLine("==========================");
@@ -107,7 +105,6 @@ class Program
                                     }
                                 }
                             }
-                            
                             break;
 
                         case "2":
@@ -128,7 +125,6 @@ class Program
                     Console.Write("Masukkan Nama yang ingin dicari : ");
                     string searchName = Console.ReadLine();
                     manageUser.FindUserByName(searchName);
-
                     break;
 
                 case "4":
@@ -138,7 +134,6 @@ class Program
                     Console.Write("Masukkan Password : ");
                     string pass = Console.ReadLine();
                     manageUser.AuthenticateUser(username, pass);
-
                     break;
 
                 case "5":
