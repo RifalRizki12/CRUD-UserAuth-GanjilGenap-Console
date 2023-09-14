@@ -13,10 +13,11 @@ namespace Project1
 
         public void AddUser(string firstName, string lastName, string password)
         {
+
             //validasi inputan kosong
             if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName) || string.IsNullOrWhiteSpace(password))
             {
-                Console.WriteLine("\nInput tidak valid. Pastikan semua kolom diisi.");
+                Console.WriteLine("\nInput tidak valid. Pastikan semua kolom diisi !\n");
                 return; // Jika input tidak valid, keluar dari metode.
             }
 
@@ -76,12 +77,8 @@ namespace Project1
             return hasUpperCase && hasDigit;
         }
 
-
-
         public void FindUserByName(string fullname)
         {
-            //var searchUser =  users.Where(u => u.FirstName == fullname || u.LastName == fullname).ToList();
-
             // Mencari pengguna yang cocok berdasarkan nama yang mengandung kata kunci
             var searchUser = users.Where(u => Regex.IsMatch(u.FirstName, fullname, RegexOptions.IgnoreCase) ||
                                               Regex.IsMatch(u.LastName, fullname, RegexOptions.IgnoreCase) ||
@@ -93,31 +90,37 @@ namespace Project1
             }
             else
             {
+                Console.WriteLine("--------------------------");
                 foreach (var item in searchUser)
                 {
                     Console.WriteLine($"\nNama : {item.FirstName} {item.LastName}");
                     Console.WriteLine($"Username : {item.Username}");
-                    Console.WriteLine($"Password : {item.Password}\n");
+                    Console.WriteLine($"Password : {item.Password}");
                 }
             }
         }
 
+        public User FindUserById(int id)
+        {
+            return users.FirstOrDefault(u => u.Id == id);
+        }
+
         public void editUser(int id, string newFirstName, string newLastName, string newPassword)
         {
-            User userEdit = users.FirstOrDefault(u => u.Id == id);
+            User userEdit = FindUserById(id);
 
-            if (userEdit != null)
+            //validasi inputan kosong
+            if (string.IsNullOrWhiteSpace(newFirstName) || string.IsNullOrWhiteSpace(newLastName) || string.IsNullOrWhiteSpace(newPassword))
             {
-                userEdit.FirstName = newFirstName;
-                userEdit.LastName = newLastName;
-                userEdit.Password = newPassword;
+                Console.WriteLine("\nInput tidak valid. Pastikan semua kolom diisi !\n");
+                return; // Jika input tidak valid, keluar dari metode.
+            }
 
-                Console.WriteLine($"\nData pengguna dengan ID {id} telah diubah !\n");
-            }
-            else
-            {
-                Console.WriteLine($"\nTidak ada pengguna dengan ID {id} yang ditemukan !\n");
-            }
+            userEdit.FirstName = newFirstName;
+            userEdit.LastName = newLastName;
+            userEdit.Password = newPassword;
+
+            Console.WriteLine($"\nData pengguna dengan ID {id} telah diubah !\n");
         }
 
         public void deleteUser(int id)
@@ -140,7 +143,7 @@ namespace Project1
             if (cekUser != null && cekUser.Password == password)
             {
                 Console.WriteLine("\nLogin berhasil!");
-                Project1.GanjilGenap.GanjilOrGenap();
+                GanjilGenap.GanjilOrGenap();
             }
             else
             {

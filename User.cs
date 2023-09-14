@@ -11,19 +11,20 @@ namespace Project1
         public int Id { get; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Username { get; set; }
+        public string Username { get; }
         public string Password { get; set; }
 
-        public User(int id, string firstName, string lastName, string password, List<User> _users)
+        public User(int id, string firstName, string lastName, string password, List<User> existingUsers)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             Password = password;
-            Username = GenerateUsername(firstName, lastName, _users);
+            Username = GenerateUsername(firstName, lastName, existingUsers);
         }
 
-        private string GenerateUsername(string firstName, string lastName, List<User> _users)
+        //method untuk membuat username otomatis
+        private string GenerateUsername(string firstName, string lastName, List<User> existingUsers)
         {
             // Mengambil dua huruf pertama dari nama depan dan nama belakang
             string firstTwoChars = firstName.Substring(0, Math.Min(2, firstName.Length));
@@ -34,7 +35,7 @@ namespace Project1
 
             string username = baseUsername;
             int suffix = 1;
-            while (_users.Any(u => u.Username == username))
+            while (existingUsers.Any(u => u.Username == username))
             {
                 username = $"{baseUsername}{suffix}";
                 suffix++;
