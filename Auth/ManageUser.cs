@@ -21,7 +21,18 @@ public class ManageUser
             return; // Jika input tidak valid, keluar dari metode.
         }
 
-        int nextId = users.Count + 1; // Menentukan ID berikutnya
+        int nextId = 1; // Menentukan ID berikutnya
+        if(users.Count > 0)
+        {
+            nextId = users.Max(u => u.Id) + 1;
+        }
+
+        // Mengecek apakah ID sudah ada dalam daftar pengguna
+        while (users.Any(u => u.Id == nextId))
+        {
+            nextId++; // Menambahkan 1 ke ID jika sudah ada
+        }
+
         User newUser = new User(nextId, firstName, lastName, password, users);
 
         users.Add(newUser); // Menambahkan pengguna ke dalam koleksi
